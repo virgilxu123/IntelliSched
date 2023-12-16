@@ -1,0 +1,13 @@
+.my-custom-scrollbar {
+    position: relative;
+    width: 75vw;
+    overflow-x: auto;
+}
+.table-wrapper-scroll-x {
+    display: block;
+    white-space: nowrap;
+}
+
+.fixed-column {
+    width: 50px; /* Adjust the width based on your needs */
+  }
