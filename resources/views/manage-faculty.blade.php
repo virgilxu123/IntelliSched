@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">LIST OF FACULTY MEMBERS</strong>
-                            <button type="button" class="btn btn-primary float-right rounded"><i class="fa fa-plus"></i>&nbsp; Add</button>
+                            <button type="button" class="btn btn-primary float-right rounded" data-toggle="modal" data-target="#addFacultyModal"><i class="fa fa-plus"></i>&nbsp; Add</button>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -83,6 +83,56 @@
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+
+    {{-- start-Modal --}}
+    <div class="modal fade" id="addFacultyModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Add Faculty</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Name</div>
+                                    <input type="text" id="code" name="code" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Designation</div>
+                                    <select data-placeholder="Choose a Country..." class="form-control standardSelect" tabindex="1">
+                                        <option value=""></option>
+                                        <option value="1st">Instructor 1</option>
+                                        <option value="2nd">Instructor 2</option>
+                                        <option value="3rd">Instructor 3</option>
+                                        <option value="4th">Instructor 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Load</div>
+                                    <input type="number" id="blocks" name="blocks" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- edn modal --}}
 @endsection
 
 @section('scripts')

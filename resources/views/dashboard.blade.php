@@ -134,8 +134,36 @@
             </div>
         </div>
         <!--/.col-->
+        <div class="animated fadeIn">
+            <div class="row">
 
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Predicted vs Actual Enrollments </h4>
+                            <canvas id="sales-chart"></canvas>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Enrollment Comparison by Semester </h4>
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+
+            </div>
+
+        </div><!-- .animated -->
     </div> <!-- .content -->
+@endsection
+
+@section('scripts')
+    <!--  Chart js -->
+    <script src="{{asset('admin-assets/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
+    <script src="{{asset('admin-assets/assets/js/init-scripts/chart-js/chartjs-init.js')}}"></script>
 @endsection
 
 

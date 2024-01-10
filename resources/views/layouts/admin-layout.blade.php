@@ -60,18 +60,15 @@
                             <li><i class="fa fa-building-o"></i><a href="{{route('manage-rooms')}}">Rooms</a></li>
                             <li><i class="fa fa-bars"></i><a href="{{route('manage-classes')}}">Classes</a></li>
                             @if(auth()->user()->role_id === 1)
-                                <li><i class="fa fa-user"></i><a href="{{route('manage-classes')}}">Admin</a></li>
+                                <li><i class="fa fa-user"></i><a href="{{route('manage-admin')}}">Admin</a></li>
                             @endif
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Schedule</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-bolt"></i><a href="tables-basic.html">Auto</a></li>
-                            <li><i class="fa fa-table"></i><a href="{{route('schedule')}}">Manual</a></li>
-                        </ul>
+                            
+                    <li>
+                        <a href="{{route('schedule')}}"><i class="menu-icon fa fa-table"></i> Schedule</a>
                     </li>
-
+                    
                     <h3 class="menu-title">Utilities</h3><!-- /.menu-title -->
 
                     <li>
@@ -146,7 +143,7 @@
     <script src="{{asset('admin-assets/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('admin-assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/main.js')}}"></script>
-
+    
 
     {{-- <script src="{{asset('admin-assets/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/dashboard.js')}}"></script>
