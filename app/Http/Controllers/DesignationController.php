@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classroom;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 
-class ClassroomController extends Controller
+class DesignationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $rooms = Classroom::all();
-
-        return view('manage-rooms', compact('rooms'));
+        //
     }
 
     /**
@@ -30,21 +28,13 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'room_number' => 'required',
-            'capacity' => 'required',
-            'type' => 'required',
-        ]);
-        // Create a new faculty using mass assignment
-        $room = Classroom::create($validatedData);
-    
-        return redirect()->route('manage-rooms')->with('success', 'Room created successfully!');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Classroom $classroom)
+    public function show(Designation $designation)
     {
         //
     }
@@ -52,7 +42,7 @@ class ClassroomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Classroom $classroom)
+    public function edit(Designation $designation)
     {
         //
     }
@@ -60,7 +50,7 @@ class ClassroomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classroom $classroom)
+    public function update(Request $request, Designation $designation)
     {
         //
     }
@@ -68,7 +58,7 @@ class ClassroomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classroom $classroom)
+    public function destroy(Designation $designation)
     {
         //
     }

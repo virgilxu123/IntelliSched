@@ -30,130 +30,61 @@
     </div>
 @endsection
 @section('content')
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">LIST OF CLASS GROUP</strong>
-                        <button type="button" class="btn btn-primary float-right rounded" data-toggle="modal" data-target="#addRoomModal"><i class="fa fa-plus"></i>&nbsp; Add</button>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Room #</th>
-                                    <th>Capacity</th>
-                                    <th>Type</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>601</td>
-                                    <td>25</td>
-                                    <td>Lecture</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>602</td>
-                                    <td>25</td>
-                                    <td>Lab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>603</td>
-                                    <td>25</td>
-                                    <td>Lab</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>604</td>
-                                    <td>25</td>
-                                    <td>Lab</td>
-                                    <td></td>
-                                </tr>
-                                
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="content mt-3">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
-    {{-- <div class="content mt-3">
+        @endif
         <div class="animated fadeIn">
             <div class="row">
 
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">LIST OF CLASSROOMS</strong>
-                            <button type="button" class="btn btn-primary float-right rounded"><i class="fa fa-plus"></i>&nbsp; Add</button>
+                            <strong class="card-title">LIST OF CLASS GROUP</strong>
+                            <button type="button" class="btn btn-primary float-right rounded" data-toggle="modal" data-target="#addRoomModal"><i class="fa fa-plus"></i>&nbsp; Add</button>
                         </div>
-                        <div class="card-body ">
-                            <div class="table-wrapper-scroll-x my-custom-scrollbar ">
-                                <table class="table table-bordered mb-0">
-                                    <thead>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Room #</th>
+                                        <th>Type</th>
+                                        <th>Capacity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($rooms as $room)
                                         <tr>
-                                            <th scope="col" colspan="2">Room #</th>
-                                            <th scope="col" colspan="2">7:00 AM</th>
-                                            <th scope="col" colspan="2">8:00 AM</th>
-                                            <th scope="col" colspan="2">9:00 AM</th>
-                                            <th scope="col" colspan="2">10:00 AM</th>
-                                            <th scope="col" colspan="2">11:00 AM</th>
-                                            <th scope="col" colspan="2">12:00 PM</th>
-                                            <th scope="col" colspan="2">1:00 PM</th>
-                                            <th scope="col" colspan="2">2:00 PM</th>
-                                            <th scope="col" colspan="2">3:00 PM</th>
-                                            <th scope="col" colspan="2">4:00 PM</th>
-                                            <th scope="col" colspan="2">5:00 PM</th>
-                                            <th scope="col" colspan="2">6:00 PM</th>
+                                            <td>{{$room->room_number}}</td>
+                                            <td>{{$room->type}}</td>
+                                            <td>{{$room->capacity}}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
+                                                        <i class="fa fa-cog"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <div class="dropdown-menu-content">
+                                                            <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
+                                                            <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" colspan="2">601</th>
-                                            <td class="fixed-column"></td>
-                                            <td colspan="3" class="alert alert-primary m-1"><p>7:30-9:00</p></td>
-                                            <td colspan="3">9:00-10:30</td>
-                                            <td colspan="3">10:30-12:00</td>
-                                            <td colspan="2">12:00-1:00</td>
-                                            <td colspan="3">1:00-2:30</td>
-                                            <td colspan="3">2:30-4:00</td>
-                                            <td colspan="3">4:00-5:30</td>
-                                            <td colspan="3">5:30-7:00</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" colspan="2">602</th>
-                                            <td class="fixed-column"></td>
-                                            <td colspan="3">7:30-9:00</td>
-                                            <td colspan="3">9:00-10:30</td>
-                                            <td colspan="3">10:30-12:00</td>
-                                            <td colspan="2">12:00-1:00</td>
-                                            <td colspan="3">1:00-2:30</td>
-                                            <td colspan="3">2:30-4:00</td>
-                                            <td colspan="3">4:00-5:30</td>
-                                            <td colspan="3">5:30-7:00</td>
-                                            
-                                        </tr>
-                                    </tbody>
-                                    
-                                </table>
-                            </div>
+                                     @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div><!-- .animated -->
-    </div><!-- .content --> --}}
-
+    </div><!-- .content -->
 
     {{-- start-Modal --}}
     <div class="modal fade" id="addRoomModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -165,43 +96,45 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="card-body card-block">
-                        <form action="" method="post" class="">
+                <form action="{{route('add-room')}}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="card-body card-block">
+                            
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Room #</div>
-                                    <input type="text" id="room" name="room" class="form-control">
+                                    <input type="text" id="room" name="room_number" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Capacity</div>
-                                    <input type="text" id="capacity" name="capacity" class="form-control">
+                                    <input type="number" id="capacity" name="capacity" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Type</div>
-                                    <select data-placeholder="Choose a type..." class="form-control standardSelect" tabindex="1">
+                                    <select name="type" data-placeholder="Choose a type..." class="form-control standardSelect" tabindex="1">
                                         <option value=""></option>
-                                        <option value="1st">Lecture</option>
-                                        <option value="2nd">Laboratory</option>
+                                        <option value="Lecture">Lecture</option>
+                                        <option value="Laboratory">Laboratory</option>
                                     </select>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Confirm</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    {{-- edn modal --}}
+    {{-- end modal --}}
 @endsection
 
 @section('scripts')

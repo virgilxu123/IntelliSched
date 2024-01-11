@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('rank');
             $table->string('status');
+            $table->binary('image')->nullable();
             $table->timestamps();
         });
     }

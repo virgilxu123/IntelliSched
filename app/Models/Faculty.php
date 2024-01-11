@@ -13,5 +13,6 @@ class Faculty extends Model
         'name',
         'rank',
         'status',
+        'image',
     ];
 }

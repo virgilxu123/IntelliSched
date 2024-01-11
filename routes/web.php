@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,15 +42,16 @@ Route::middleware('auth')->prefix('intellisched')->group(function() {
     Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('manage-classes', function () {
-        return view('manage-classes');
-    })->name('manage-classes');
-    Route::get('manage-rooms', function () {
-        return view('manage-rooms');
-    })->name('manage-rooms');
-    Route::get('manage-faculty', function () {
-        return view('manage-faculty');
-    })->name('manage-faculty');
+    Route::get('manage-subjects', [SubjectController::class, 'index'])->name('manage-subjects');
+    Route::post('add-subject', [SubjectController::class, 'store'])->name('add-subject');
+
+    Route::get('manage-rooms', [ClassroomController::class, 'index'])->name('manage-rooms');
+    Route::post('add-room', [ClassroomController::class, 'store'])->name('add-room');
+
+    Route::get('manage-faculty', [FacultyController::class, 'index'])->name('manage-faculty');
+    Route::post('add-faculty', [FacultyController::class, 'store'])->name('add-faculty');
+    Route::get('profile/{faculty}', [FacultyController::class, 'show'])->name('profile');
+
     Route::get('manage-admin', function () {
         return view('manage-admin');
     })->name('manage-admin');

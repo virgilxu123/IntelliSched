@@ -12,7 +12,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+
+        return view('manage-subjects', compact('subjects'));
     }
 
     /**
@@ -28,7 +30,17 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'course_code' => 'required',
+            'description' => 'required',
+            'units' => 'required',
+            'year_level' => 'required',
+            'term' => 'required',
+        ]);
+        // Create a new faculty using mass assignment
+        $subject = Subject::create($validatedData);
+
+        return redirect()->route('manage-subjects')->with('success', 'Subject created successfully!');
     }
 
     /**

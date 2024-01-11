@@ -12,7 +12,9 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        //
+        $faculties = Faculty::all();
+
+        return view('manage-faculty', compact('faculties'));
     }
 
     /**
@@ -28,7 +30,17 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'rank' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
+    
+        // Create a new faculty using mass assignment
+        $faculty = Faculty::create($validatedData);
+    
+        return redirect()->route('manage-faculty')->with('success', 'Faculty created successfully!');
+
     }
 
     /**
@@ -36,7 +48,7 @@ class FacultyController extends Controller
      */
     public function show(Faculty $faculty)
     {
-        //
+        return view('profile.faculty', compact('faculty'));
     }
 
     /**

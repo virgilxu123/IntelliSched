@@ -58,7 +58,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-users"></i><a href="{{route('manage-faculty')}}">Faculty</a></li>
                             <li><i class="fa fa-building-o"></i><a href="{{route('manage-rooms')}}">Rooms</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{{route('manage-classes')}}">Classes</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{route('manage-subjects')}}">Subjects</a></li>
                             @if(auth()->user()->role_id === 1)
                                 <li><i class="fa fa-user"></i><a href="{{route('manage-admin')}}">Admin</a></li>
                             @endif
