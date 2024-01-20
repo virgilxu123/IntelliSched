@@ -31,7 +31,8 @@ class FacultyController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'rank' => 'required|string|max:255',
             'status' => 'required|string|max:255',
         ]);

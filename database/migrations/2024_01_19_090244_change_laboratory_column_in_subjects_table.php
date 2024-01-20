@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classrooms', function (Blueprint $table) {
-            $table->id();
-            $table->string('room_number');
-            $table->string('type');
-            $table->integer('capacity');
-            $table->timestamps();
+        Schema::table('subjects', function (Blueprint $table) {
+            $table->enum('laboratory', ['Yes', 'No'])->change(); // Change the column type to ENUM
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classrooms');
+        Schema::table('subjects', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -51,28 +51,19 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Designation</th>
-                                        <th>Load</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($faculties as $faculty)
                                         <tr>
-                                            <td><a href="{{route('profile', $faculty)}}">{{$faculty->name}}</a></td>
+                                            <td><a href="{{route('profile', $faculty)}}">{{$faculty->first_name}} {{$faculty->last_name}}</a></td>
                                             <td>{{$faculty->rank}}</td>
                                             <td>{{$faculty->status}}</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
-                                                        <i class="fa fa-cog"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                        <div class="dropdown-menu-content">
-                                                            <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <td class="text-center">
+                                                <span class="ti-pencil" data-faculty-id="{{$faculty->id}}" data-faculty-name="{{$faculty->first_name . ' ' . $faculty->last_name}}" data-toggle="modal" data-target="#editFaculty"  style="cursor: pointer"></span>
+                                                <span class="ti-trash text-danger" data-toggle="modal" data-target="#deleteFaculty" style="cursor: pointer"></span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -89,7 +80,7 @@
     {{-- start-Modal --}}
     <div class="modal fade" id="addFacultyModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <form action="{{route('add-faculty')}}" method="post" class="">
+            <form action="{{route('add-faculty')}}" method="post" id="deleteFacultyForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -102,48 +93,46 @@
                     <div class="modal-body">
                         <div class="card-body card-block">
                             
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">Name</div>
-                                        <input type="text" id="name" name="name" class="form-control">
-                                    </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" id="first_name" name="first_name" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">Rank</div>
-                                        <select name="rank" data-placeholder="" class="form-control standardSelect" tabindex="1">
-                                            <option value=""></option>
-                                            <option value="Instructor 1">Instructor 1</option>
-                                            <option value="Instructor 2">Instructor 2</option>
-                                            <option value="Instructor 3">Instructor 3</option>
-                                            <option value="Assistant Professor 1">Assistant Professor 1</option>
-                                            <option value="Assistant Professor 2">Assistant Professor 2</option>
-                                            <option value="Assistant Professor 3">Assistant Professor 3</option>
-                                            <option value="Assistant Professor 4">Assistant Professor 4</option>
-                                            <option value="Associate Professor 1">Associate Professor 1</option>
-                                            <option value="Associate Professor 2">Associate Professor 2</option>
-                                            <option value="Associate Professor 3">Associate Professor 3</option>
-                                            <option value="Associate Professor 4">Associate Professor 4</option>
-                                            <option value="Associate Professor 5">Associate Professor 5</option>
-                                            <option value="Professor 1">Professor 1</option>
-                                            <option value="Professor 2">Professor 2</option>
-                                            <option value="Professor 3">Professor 3</option>
-                                            <option value="Professor 4">Professor 4</option>
-                                            <option value="Professor 5">Professor 5</option>
-                                            <option value="Professor 6">Professor 6</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" id="last_name" name="last_name" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">Status</div>
-                                        <select name="status" data-placeholder="" class="form-control standardSelect" tabindex="1">
-                                            <option value=""></option>
-                                            <option value="Permanent">Permanent</option>
-                                            <option value="Contractual">Contractual</option>
-                                            <option value="Part time">Part time</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="rank">Rank</label>
+                                    <select id="rank" name="rank" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                                        <option value=""></option>
+                                        <option value="Instructor 1">Instructor 1</option>
+                                        <option value="Instructor 2">Instructor 2</option>
+                                        <option value="Instructor 3">Instructor 3</option>
+                                        <option value="Assistant Professor 1">Assistant Professor 1</option>
+                                        <option value="Assistant Professor 2">Assistant Professor 2</option>
+                                        <option value="Assistant Professor 3">Assistant Professor 3</option>
+                                        <option value="Assistant Professor 4">Assistant Professor 4</option>
+                                        <option value="Associate Professor 1">Associate Professor 1</option>
+                                        <option value="Associate Professor 2">Associate Professor 2</option>
+                                        <option value="Associate Professor 3">Associate Professor 3</option>
+                                        <option value="Associate Professor 4">Associate Professor 4</option>
+                                        <option value="Associate Professor 5">Associate Professor 5</option>
+                                        <option value="Professor 1">Professor 1</option>
+                                        <option value="Professor 2">Professor 2</option>
+                                        <option value="Professor 3">Professor 3</option>
+                                        <option value="Professor 4">Professor 4</option>
+                                        <option value="Professor 5">Professor 5</option>
+                                        <option value="Professor 6">Professor 6</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="status">Status</label>
+                                    <select id="status" name="status" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                                        <option value=""></option>
+                                        <option value="Permanent">Permanent</option>
+                                        <option value="Contractual">Contractual</option>
+                                        <option value="Part time">Part time</option>
+                                    </select>
                                 </div>
                             
                         </div>
@@ -156,8 +145,34 @@
             </form>
         </div>
     </div>
-
     {{-- edn modal --}}
+    {{-- Delete confirmation modal --}}
+    <div class="modal fade" id="deleteFaculty" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <form action="{{route('delete-faculty',$faculty)}}" method="post" >
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="card-body card-block">
+                            <p id="deleteFacultyMessage" class="card-content text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark rounded" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger rounded">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- Delete confirmation modal --}}
+    
 @endsection
 
 @section('scripts')
@@ -172,4 +187,21 @@
     <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.ti-trash').click(function() {
+                // Get the faculty-id and faculty-name
+                var facultyId = $(this).closest('tr').find('.ti-pencil').data('faculty-id');
+                var facultyName = $(this).closest('tr').find('.ti-pencil').data('faculty-name');
+                console.log(facultyId, facultyName);
+
+                // Update the modal content dynamically
+                $('#deleteFacultyMessage').text('Are you sure you want to delete ' + facultyName + '?');
+
+                // Update the form action attribute dynamically
+                var deleteFacultyForm = $('#deleteFacultyForm');
+                deleteFacultyForm.attr('action', '/delete-faculty/' + facultyId);
+            });
+        });
+    </script>
 @endsection

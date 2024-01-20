@@ -12,6 +12,7 @@
     <title>@yield('title', 'IntelliSched')</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <link rel="apple-touch-icon" href="{{asset('admin-assets/apple-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('admin-assets/favicon.ico')}}">
@@ -143,6 +144,7 @@
     <script src="{{asset('admin-assets/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('admin-assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/main.js')}}"></script>
+
     
 
     {{-- <script src="{{asset('admin-assets/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>

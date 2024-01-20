@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->string('course_code');
-            $table->string('description');
-            $table->string('units');
-            $table->string('year_level');
-            $table->string('term');
+        Schema::table('subjects', function (Blueprint $table) {
             $table->string('subject_type');
             $table->string('Laboratory');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::table('subjects', function (Blueprint $table) {
+            $table->dropColumn('subject_type');
+            $table->dropColumn('Laboratory');
+        });
     }
 };

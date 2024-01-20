@@ -32,8 +32,10 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <div class="mx-auto d-block">
-                                <img class="rounded-circle mx-auto d-block" src="{{asset('admin-assets/images/no-image-icon.png')}}" alt="Profile Pic">
+                            <div class="mx-autod-block">
+                                <div class="row justify-content-md-center">
+                                    <img class="rounded-circle col-lg-9" src="{{asset('admin-assets/images/no-image-icon.png')}}" alt="Profile Pic">
+                                </div>
                                 <h5 class="text-sm-center mt-2 mb-1">{{$faculty->name}}</h5>
                                 <div class="location text-sm-center">{{$faculty->rank}}</div>
                             </div>

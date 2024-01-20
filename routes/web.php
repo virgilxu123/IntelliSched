@@ -51,6 +51,7 @@ Route::middleware('auth')->prefix('intellisched')->group(function() {
     Route::get('manage-faculty', [FacultyController::class, 'index'])->name('manage-faculty');
     Route::post('add-faculty', [FacultyController::class, 'store'])->name('add-faculty');
     Route::get('profile/{faculty}', [FacultyController::class, 'show'])->name('profile');
+    Route::post('delete-faculty/{faculty}', [FacultyController::class, 'destroy'])->name('delete-faculty');
 
     Route::get('manage-admin', function () {
         return view('manage-admin');
@@ -59,5 +60,9 @@ Route::middleware('auth')->prefix('intellisched')->group(function() {
         return view('schedule');
     })->name('schedule');
 });
+
+Route::get('create-schedule', function () {
+    return view('create-schedule');
+})->name('create-schedule');
 
 require __DIR__.'/auth.php';

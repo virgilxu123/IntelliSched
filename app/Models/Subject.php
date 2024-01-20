@@ -15,5 +15,7 @@ class Subject extends Model
         'units',
         'year_level',
         'term',
+        'subject_type',
+        'laboratory',
     ];
 }

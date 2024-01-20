@@ -12,7 +12,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Manage Classes</h1>
+                    <h1>Manage Subjects</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
                         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-                        <li class="active">Manage Classes</li>
+                        <li class="active">Manage Subjects</li>
                     </ol>
                 </div>
             </div>
@@ -31,13 +31,18 @@
 
 @section('content')
     <div class="content mt-3">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="animated fadeIn">
             <div class="row">
 
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">LIST OF CLASS GROUP</strong>
+                            <strong class="card-title">LIST OF Subjects</strong>
                             <button type="button" class="btn btn-primary float-right rounded" data-toggle="modal" data-target="#addClassModal"><i class="fa fa-plus"></i>&nbsp; Add</button>
                         </div>
                         <div class="card-body">
@@ -48,6 +53,7 @@
                                         <th>Description</th>
                                         <th>Units</th>
                                         <th>Year Level</th>
+                                        <th>Term</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -58,6 +64,7 @@
                                             <td>{{$subject->description}}</td>
                                             <td>{{$subject->units}}</td>
                                             <td>{{$subject->year_level}}</td>
+                                            <td>{{$subject->term}}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
@@ -125,6 +132,22 @@
                                 <option value="1st Semester">1st Semester</option>
                                 <option value="2nd Semester">2nd Semester</option>
                                 <option value="Summer">Summer</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 >
+                            <label for="subject_type">Type</label>
+                            <select name="subject_type" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                                <option value=""></option>
+                                <option value="Minor">Minor</option>
+                                <option value="Major">Major</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 >
+                            <label for="laboratory">Laboratory</label>
+                            <select name="laboratory" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                                <option value=""></option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                     </div>

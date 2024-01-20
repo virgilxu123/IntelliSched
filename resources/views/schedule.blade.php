@@ -57,7 +57,7 @@
                                 <tbody>
                                     <tr>
                                         <td>2023-2024</td>
-                                        <td><a href=""><em>1st-Semester</em></a></td>
+                                        <td><a href="{{route('create-schedule')}}"><em>1st-Semester</em></a></td>
                                         <td>
                                             
                                         </td>

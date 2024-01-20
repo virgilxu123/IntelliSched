@@ -31,11 +31,13 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'course_code' => 'required',
+            'course_code' => 'required|unique:subjects,course_code',
             'description' => 'required',
             'units' => 'required',
             'year_level' => 'required',
             'term' => 'required',
+            'subject_type' => 'required',
+            'laboratory' => 'required',
         ]);
         // Create a new faculty using mass assignment
         $subject = Subject::create($validatedData);

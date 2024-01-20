@@ -1,0 +1,16 @@
+.fill {
+    cursor:pointer;
+}
+.empty {
+    background-color: white;
+}
+.hold {
+    border: solid #bababa 4px;
+}
+.hovered {
+    background: #cbcbcb;
+    border-style: dashed;
+}
+.invisible {
+    display: none;
+}
