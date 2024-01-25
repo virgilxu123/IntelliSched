@@ -36,7 +36,7 @@
                                 <div class="row justify-content-md-center">
                                     <img class="rounded-circle col-lg-9" src="{{asset('admin-assets/images/no-image-icon.png')}}" alt="Profile Pic">
                                 </div>
-                                <h5 class="text-sm-center mt-2 mb-1">{{$faculty->name}}</h5>
+                                <h5 class="text-sm-center mt-2 mb-1">{{$faculty->first_name}} {{$faculty->last_name}}</h5>
                                 <div class="location text-sm-center">{{$faculty->rank}}</div>
                             </div>
                         </div>
@@ -50,9 +50,13 @@
                         
                             <div class="card-body card-block">
                                 <form action="" method="post" class="">
-                                    <div class="form-group col-lg-12">
-                                        <label for="name" class=" form-control-label">Name</label>
-                                        <input type="text" id="name" name="name" value="{{$faculty->name}}" class="form-control">
+                                    <div class="form-group col-lg-6">
+                                        <label for="name" class=" form-control-label">First Name</label>
+                                        <input type="text" id="name" name="name" value="{{$faculty->first_name}}" class="form-control">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="name" class=" form-control-label">Last Name</label>
+                                        <input type="text" id="name" name="name" value="{{$faculty->last_name}}" class="form-control">
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label for="rank" class=" form-control-label">Rank</label>
