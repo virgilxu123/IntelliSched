@@ -62,7 +62,7 @@
                                             <td>{{$faculty->rank}}</td>
                                             <td>{{$faculty->status}}</td>
                                             <td class="text-center">
-                                                <span class="ti-pencil" data-faculty-id="{{$faculty->id}}" data-faculty-name="{{$faculty->first_name . ' ' . $faculty->last_name}}" data-toggle="modal" data-target="#editFaculty"  style="cursor: pointer"></span>
+                                                <span class="ti-pencil text-success" data-faculty-id="{{$faculty->id}}" data-faculty-name="{{$faculty->first_name . ' ' . $faculty->last_name}}" data-toggle="modal" data-target="#editFaculty"  style="cursor: pointer"></span>
                                                 <span class="ti-trash text-danger" data-toggle="modal" data-target="#deleteFaculty" style="cursor: pointer"></span>
                                             </td>
                                         </tr>

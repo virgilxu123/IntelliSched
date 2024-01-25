@@ -40,7 +40,8 @@ class FacultyController extends Controller
         // Create a new faculty using mass assignment
         $faculty = Faculty::create($validatedData);
     
-        return redirect()->route('manage-faculty')->with('success', 'Faculty created successfully!');
+        // Return a JSON response
+        return response()->json(['message' => 'Faculty created successfully']);
 
     }
 

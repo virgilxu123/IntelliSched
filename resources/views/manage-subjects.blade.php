@@ -115,9 +115,9 @@
                             <label for="units">Units</label>
                             <input type="number" name="units" class="form-control" id="units" placeholder="Units">
                         </div>
-                        <div class="form-group col-lg-6 >
+                        <div class="form-group col-lg-6">
                             <label for="year_level">Year</label>
-                            <select name="year_level" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                            <select id="year_level" name="year_level" data-placeholder="" class="form-control standardSelect" tabindex="1">
                                 <option value=""></option>
                                 <option value="1st Year">1st Year</option>
                                 <option value="2nd Year">2nd Year</option>
@@ -125,26 +125,26 @@
                                 <option value="4th Year">4th Year</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-6 >
+                        <div class="form-group col-lg-6">
                             <label for="term">Term</label>
-                            <select name="term" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                            <select id="term" name="term" data-placeholder="" class="form-control standardSelect" tabindex="1">
                                 <option value=""></option>
                                 <option value="1st Semester">1st Semester</option>
                                 <option value="2nd Semester">2nd Semester</option>
                                 <option value="Summer">Summer</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-6 >
+                        <div class="form-group col-lg-6">
                             <label for="subject_type">Type</label>
-                            <select name="subject_type" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                            <select id="subject_type" name="subject_type" data-placeholder="" class="form-control standardSelect" tabindex="1">
                                 <option value=""></option>
                                 <option value="Minor">Minor</option>
                                 <option value="Major">Major</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-6 >
+                        <div class="form-group col-lg-6">
                             <label for="laboratory">Laboratory</label>
-                            <select name="laboratory" data-placeholder="" class="form-control standardSelect" tabindex="1">
+                            <select id="laboratory" name="laboratory" data-placeholder="" class="form-control standardSelect" tabindex="1">
                                 <option value=""></option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
