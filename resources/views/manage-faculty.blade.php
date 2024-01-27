@@ -36,6 +36,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if(session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
+        @endif
         <div class="animated fadeIn">
             <div class="row">
 
@@ -63,7 +68,7 @@
                                             <td>{{$faculty->status}}</td>
                                             <td class="text-center">
                                                 <span class="ti-pencil text-success" data-faculty-id="{{$faculty->id}}" data-faculty-name="{{$faculty->first_name . ' ' . $faculty->last_name}}" data-toggle="modal" data-target="#editFaculty"  style="cursor: pointer"></span>
-                                                <span class="ti-trash text-danger" data-toggle="modal" data-target="#deleteFaculty" style="cursor: pointer"></span>
+                                                <span class="ti-trash text-danger" data-toggle="modal" data-target="#deleteFaculty" style="cursor: pointer" data-faculty-id="{{$faculty->id}}" data-faculty-name="{{$faculty->first_name . ' ' . $faculty->last_name}}"></span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -80,7 +85,7 @@
     {{-- start-Modal --}}
     <div class="modal fade" id="addFacultyModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <form action="{{route('add-faculty')}}" method="post" id="deleteFacultyForm">
+            <form action="{{route('add-faculty')}}" method="post" id="addFacultyForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -149,7 +154,7 @@
     {{-- Delete confirmation modal --}}
     <div class="modal fade" id="deleteFaculty" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
-            <form action="{{route('delete-faculty',$faculty)}}" method="post" >
+            <form action="" method="post" id="deleteFacultyForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -157,7 +162,6 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    
                     <div class="modal-body">
                         <div class="card-body card-block">
                             <p id="deleteFacultyMessage" class="card-content text-danger"></p>
@@ -188,20 +192,30 @@
     <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
     <script>
-        $(document).ready(function() {
-            $('.ti-trash').click(function() {
-                // Get the faculty-id and faculty-name
-                var facultyId = $(this).closest('tr').find('.ti-pencil').data('faculty-id');
-                var facultyName = $(this).closest('tr').find('.ti-pencil').data('faculty-name');
-                console.log(facultyId, facultyName);
+        document.addEventListener('DOMContentLoaded', function() {
+            const trashIcons = document.querySelectorAll('.ti-trash');
 
-                // Update the modal content dynamically
-                $('#deleteFacultyMessage').text('Are you sure you want to delete ' + facultyName + '?');
+            trashIcons.forEach(function(trashIcon) {
+                trashIcon.addEventListener('click', function() {
+                    // Get the faculty-id and faculty-name
+                    const facultyId = this.closest('tr').querySelector('.ti-trash').getAttribute('data-faculty-id');
+                    const facultyName = this.closest('tr').querySelector('.ti-trash').getAttribute('data-faculty-name');
 
-                // Update the form action attribute dynamically
-                var deleteFacultyForm = $('#deleteFacultyForm');
-                deleteFacultyForm.attr('action', '/delete-faculty/' + facultyId);
+                    // Update the modal content dynamically
+                    document.getElementById('deleteFacultyMessage').textContent = 'Are you sure you want to delete ' + facultyName + '?';
+
+                    // Update the form action attribute dynamically
+                    const deleteFacultyForm = document.getElementById('deleteFacultyForm');
+                    deleteFacultyForm.setAttribute('action', 'delete-faculty/'+facultyId);
+                });
             });
-        });
-    </script>
+
+            const deleteFacultyForm = document.getElementById('deleteFacultyForm');
+            deleteFacultyForm.addEventListener('submit', function() {
+                // You can add additional confirmation logic here if needed
+            });
+        });                                           
+
+    </script>    
+    
 @endsection

@@ -41,7 +41,7 @@ class FacultyController extends Controller
         $faculty = Faculty::create($validatedData);
     
         // Return a JSON response
-        return response()->json(['message' => 'Faculty created successfully']);
+        return redirect()->route('manage-faculty')->with('success', 'Faculty created successfully!');
 
     }
 
@@ -74,6 +74,7 @@ class FacultyController extends Controller
      */
     public function destroy(Faculty $faculty)
     {
-        //
+        $faculty->delete();
+        return redirect()->route('manage-faculty')->with('danger', 'Faculty has been deleted!');
     }
 }
