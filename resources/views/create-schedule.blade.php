@@ -47,14 +47,17 @@
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="col-4">Name</th>
-                                        <th class="col-3">Load</th>
+                                        <th class="col-3">Name</th>
+                                        <th class="col-2">Load</th>
+                                        <th class="col-2">Designation</th>
                                         <th class="col-5">Subjects</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($faculties as $faculty)
                                     <tr>
-                                        <td>Catherine Alimboyong</td>
+                                        <td><a href="{{route('profile', $faculty)}}">{{$faculty->first_name}} {{$faculty->last_name}}</a></td>
+                                        <td></td>
                                         <td></td>
                                         <td>
                                             <select data-placeholder="Add Subjects..." multiple class="standardSelect">
@@ -71,21 +74,7 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Coravil Joy Avila</td>
-                                        <td></td>
-                                        <td>
-                                            <select data-placeholder="Add Subjects..." multiple class="standardSelect">
-                                                <option value=""></option>
-                                                <option value="Aland Islands">CS 112 - 1A</option>
-                                                <option value="Albania">CS 112 - 1B</option>
-                                                <option value="Algeria">CS 112 - 1C</option>
-                                                <option value="United States">CS 111 - 1A</option>
-                                                <option value="United Kingdom">CS 111 - 1B</option>
-                                                <option value="Afghanistan">CS 111 - 1C</option>
-                                            </select>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
