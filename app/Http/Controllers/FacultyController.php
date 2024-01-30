@@ -75,6 +75,6 @@ class FacultyController extends Controller
     public function destroy(Faculty $faculty)
     {
         $faculty->delete();
-        return redirect()->route('manage-faculty')->with('danger', 'Faculty has been deleted!');
+        return redirect()->route('manage-faculty')->with('delete', 'Faculty has been deleted!');
     }
 }
