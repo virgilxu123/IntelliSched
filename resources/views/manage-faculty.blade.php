@@ -38,7 +38,7 @@
         @endif
         @if(session('delete'))
             <div class="alert alert-danger">
-                {{ session('danger') }}
+                {{ session('delete') }}
             </div>
         @endif
         <div class="animated fadeIn">
@@ -193,8 +193,8 @@
     <script src="{{asset('admin-assets/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const trashIcons = document.querySelectorAll('.ti-trash');
 
+            const trashIcons = document.querySelectorAll('.ti-trash');
             trashIcons.forEach(function(trashIcon) {
                 trashIcon.addEventListener('click', function() {
                     // Get the faculty-id and faculty-name
@@ -209,10 +209,65 @@
                     deleteFacultyForm.setAttribute('action', 'delete-faculty/'+facultyId);
                 });
             });
-
             const deleteFacultyForm = document.getElementById('deleteFacultyForm');
             deleteFacultyForm.addEventListener('submit', function() {
-                // You can add additional confirmation logic here if needed
+            });
+            //validate if all fields in form are filled
+            document.getElementById('addFacultyForm').addEventListener('submit', function() {
+                const first_name = document.getElementById('first_name').value;
+                const last_name = document.getElementById('last_name').value;
+                const rank = document.getElementById('rank').value;
+                const status = document.getElementById('status').value;
+
+                if(first_name == '' || last_name == '' || rank == '' || status == '') {
+                    alert('Please fill in all fields');
+                    event.preventDefault();
+                }
+                event.preventDefault();
+
+                // Get form data
+                const data = {
+                    first_name: first_name,
+                    last_name: last_name,
+                    rank: rank,
+                    status: status
+                };
+
+                // Make AJAX request
+                fetch('{{ route("add-faculty") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    console.log('Response Status:', response.status); // Log the response status
+                    if (!response.ok) {
+                        // Check for the specific status code indicating a duplicate entry
+                        if (response.status === 422) {
+                            return response.json();
+                        } else {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data:', data); // Log the parsed JSON data
+                    if (data.success) {
+                        // If faculty is created successfully, close the modal or redirect
+                        window.location.href = '{{ route("manage-faculty") }}';
+                    } else {
+                        // If there is an error, display the error message
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while processing your request.');
+                });
             });
         });                                           
 

@@ -16,4 +16,12 @@ class Faculty extends Model
         'status',
         'image',
     ];
+
+    public function faculty_load() {
+        return $this->belongsTo(FacultyLoad::class);
+    }
+
+    public function designations () {
+        return $this->belongsToMany(Designation::class);
+    }
 }

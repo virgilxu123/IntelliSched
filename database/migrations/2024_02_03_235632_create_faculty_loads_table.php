@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use function Laravel\Prompts\table;
-
 return new class extends Migration
 {
     /**
@@ -13,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('terms', function (Blueprint $table) {
+        Schema::create('faculty_loads', function (Blueprint $table) {
             $table->id();
-            $table->string('term');
+            $table->foreignId('faculty_id')->nullable()->constrained(); 
+            $table->foreignId('class_schedule_id')->nullable()->constrained();
+            $table->foreignId('load_type_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('terms');
+        Schema::dropIfExists('faculty_loads');
     }
 };

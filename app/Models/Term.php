@@ -12,4 +12,8 @@ class Term extends Model
     protected $fillable = [
         'term',
     ];
+
+    public function academic_years() {
+        return $this->belongsToMany(AcademicYear::class);
+    }
 }

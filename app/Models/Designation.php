@@ -13,4 +13,8 @@ class Designation extends Model
         'designation',
         'units',
     ];
+
+    public function faculties() {
+        return $this->belongsToMany(Faculty::class);
+    }
 }

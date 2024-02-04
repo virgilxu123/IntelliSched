@@ -12,4 +12,8 @@ class LoadType extends Model
     protected $fillable = [
         'load_type',
     ];
+
+    public function faculty_load() {
+        return $this->belongsTo(FacultyLoad::class);
+    }
 }

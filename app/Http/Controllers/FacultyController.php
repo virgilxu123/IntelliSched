@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FacultyController extends Controller
 {
@@ -30,20 +31,35 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'rank' => 'required|string|max:255',
-            'status' => 'required|string|max:255',
-        ]);
-    
-        // Create a new faculty using mass assignment
-        $faculty = Faculty::create($validatedData);
-    
-        // Return a JSON response
-        return redirect()->route('manage-faculty')->with('success', 'Faculty created successfully!');
+        try {
+            $validatedData = $request->validate([
+                'first_name' => [
+                    'required',
+                    Rule::unique('faculties')->where(function ($query) use ($request) {
+                        return $query->where('last_name', $request->input('last_name'));
+                    }),
+                ],
+                'last_name' => 'required|string|max:255',
+                'rank' => 'required|string|max:255',
+                'status' => 'required|string|max:255',
+            ]);
 
+            // Create a new faculty using mass assignment
+            $faculty = Faculty::create($validatedData);
+
+            if ($faculty) {
+                // Return a JSON response indicating success
+                return response()->json(['success' => true]);
+            }
+
+            // Return a JSON response indicating an error
+            return response()->json(['success' => false, 'message' => 'Faculty not created!'], 500);
+        } catch (\Illuminate\Database\QueryException $e) {
+            // If there's a database-related error (e.g., unique constraint violation), return an appropriate JSON response
+            return response()->json(['success' => false, 'message' => 'Faculty already exists!'], 422);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -75,6 +91,6 @@ class FacultyController extends Controller
     public function destroy(Faculty $faculty)
     {
         $faculty->delete();
-        return redirect()->route('manage-faculty')->with('delete', 'Faculty has been deleted!');
+        return redirect()->route('manage-faculty')->with('delete', 'A faculty member has been deleted!');
     }
 }

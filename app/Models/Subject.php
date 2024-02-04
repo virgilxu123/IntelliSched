@@ -18,4 +18,9 @@ class Subject extends Model
         'subject_type',
         'laboratory',
     ];
+
+    public function class_schedule() {
+        return $this->belongsTo(ClassSchedule::class);
+    }
+    
 }
