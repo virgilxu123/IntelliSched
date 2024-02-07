@@ -307,7 +307,6 @@
                         })
                         .then(data => {
                             // Populate the edit modal with fetched data
-                            let deleteModal = document.querySelector('#deleteSubject');
                             let editForm = document.querySelector('#editSubjectModal');
                             editForm.querySelector('[name="course_code"]').value = data.course_code;
                             editForm.querySelector('[name="description"]').value = data.description;
@@ -317,12 +316,11 @@
                             editForm.querySelector('[name="laboratory"]').value = data.laboratory;
                             editForm.querySelector('[name="subject_type"]').value = data.subject_type;
 
-                            deleteModal.querySelector('#deleteSubjectMessage').textContent = `Are you sure you want to delete ${data.course_code} ${data.description}?`;
+                            document.getElementById('deleteSubjectMessage').textContent = `Are you sure you want to delete ${data.course_code} ${data.description}?`;
 
                             // Update action URL of the form
                             document.querySelector('#update').setAttribute('action', '{{ route("update-subject", ":subjectId") }}'.replace(':subjectId', subjectId));
                             document.querySelector('#deleteSubjectForm').setAttribute('action', '{{ route("delete-subject", ":subjectId") }}'.replace(':subjectId', subjectId));
-                            console.log(document.querySelector('#deleteSubjectMessage').getAttribute('action'));
                         })
                         .catch(error => {
                             

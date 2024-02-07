@@ -56,7 +56,7 @@
                                 <tbody>
                                     @foreach ($faculties as $faculty)
                                     <tr>
-                                        <td><a href="{{route('profile', $faculty)}}">{{$faculty->first_name}} {{$faculty->last_name}}</a></td>
+                                        <td><a href="{{route('show-faculty', $faculty)}}">{{$faculty->first_name}} {{$faculty->last_name}}</a></td>
                                         <td></td>
                                         <td></td>
                                         <td>
