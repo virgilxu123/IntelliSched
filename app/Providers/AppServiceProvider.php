@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Term;
 use App\Models\Faculty;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,9 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer([
-            'create-schedule'
+            'create-schedule',
+            'manage-subjects'
         ], function ($view) {
             $view->with('faculties', Faculty::all());
+            $view->with('terms', Term::all());
         });
     }
 }

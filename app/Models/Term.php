@@ -16,4 +16,8 @@ class Term extends Model
     public function academic_years() {
         return $this->belongsToMany(AcademicYear::class);
     }
+
+    public function subjects() {
+        return $this->hasMany(Subject::class);
+    }
 }

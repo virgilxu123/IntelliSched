@@ -14,7 +14,7 @@ class Subject extends Model
         'description',
         'units',
         'year_level',
-        'term',
+        'term_id',
         'subject_type',
         'laboratory',
     ];
@@ -23,4 +23,7 @@ class Subject extends Model
         return $this->belongsTo(ClassSchedule::class);
     }
     
+    public function term() {
+        return $this->belongsTo(Term::class);
+    }
 }

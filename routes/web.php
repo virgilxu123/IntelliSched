@@ -43,7 +43,10 @@ Route::middleware('auth')->prefix('intellisched')->group(function() {
         return view('dashboard');
     })->name('dashboard');
     Route::get('manage-subjects', [SubjectController::class, 'index'])->name('manage-subjects');
+    Route::get('show-subject/{subject}', [SubjectController::class, 'show'])->name('show-subject');
     Route::post('add-subject', [SubjectController::class, 'store'])->name('add-subject');
+    Route::post('update-subject/{subject}', [SubjectController::class, 'update'])->name('update-subject');
+    Route::post('delete-subject/{subject}', [SubjectController::class, 'destroy'])->name('delete-subject');
 
     Route::get('manage-rooms', [ClassroomController::class, 'index'])->name('manage-rooms');
     Route::post('add-room', [ClassroomController::class, 'store'])->name('add-room');

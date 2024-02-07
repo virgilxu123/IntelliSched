@@ -202,7 +202,7 @@
                     const facultyName = this.closest('tr').querySelector('.ti-trash').getAttribute('data-faculty-name');
 
                     // Update the modal content dynamically
-                    document.getElementById('deleteFacultyMessage').textContent = 'Are you sure you want to delete ' + facultyName + '?';
+                    document.getElementById('deleteFacultyMessage').textContent = 'Are you sure you want to delete ' + facultyName + ' from the record?';
 
                     // Update the form action attribute dynamically
                     const deleteFacultyForm = document.getElementById('deleteFacultyForm');

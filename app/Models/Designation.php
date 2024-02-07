@@ -15,6 +15,6 @@ class Designation extends Model
     ];
 
     public function faculties() {
-        return $this->belongsToMany(Faculty::class);
+        return $this->belongsToMany(Faculty::class, 'designation_faculties');
     }
 }
