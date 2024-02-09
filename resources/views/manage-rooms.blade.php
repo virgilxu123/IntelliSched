@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('admin-assets/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin-assets/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin-assets/assets/css/table.css')}}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 @endsection
 
 @section('breadcrumbs')
@@ -61,18 +62,9 @@
                                             <td>{{$room->room_number}}</td>
                                             <td>{{$room->type}}</td>
                                             <td>{{$room->capacity}}</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
-                                                        <i class="fa fa-cog"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                        <div class="dropdown-menu-content">
-                                                            <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <td class="text-center">
+                                                <span class="ti-pencil p-1 text-light rounded-lg bg-success" data-toggle="modal" data-toggle="tooltip" data-target="#updateRoom" data-placement="top" title="Edit"  style="cursor: pointer"></span>
+                                                <span class="ti-trash rounded-lg p-1 bg-danger text-light" data-toggle="modal" data-toggle="tooltip" data-target="#deleteRoom" data-placement="top" title="Delete" style="cursor: pointer"></span>
                                             </td>
                                         </tr>
                                      @endforeach

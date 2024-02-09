@@ -10,6 +10,6 @@ class DesignationFaculty extends Model
     use HasFactory;
 
     public function academic_year_terms() {
-        return $this->hasMany(AcademicYearTerm::class);
+        return $this->belongsTo(AcademicYearTerm::class);
     }
 }

@@ -9,7 +9,7 @@ class Day extends Model
 {
     use HasFactory;
 
-    public function class_schedule() {
-        return $this->belongsTo(ClassSchedule::class);
+    public function class_schedules() {
+        return $this->belongsToMany(ClassSchedule::class);
     }
 }

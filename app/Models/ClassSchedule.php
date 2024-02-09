@@ -26,11 +26,11 @@ class ClassSchedule extends Model
     }
 
     public function days() {
-        return $this->hasMany(Day::class);
+        return $this->belongsToMany(Day::class);
     }
 
     public function academic_year_terms() {
-        return $this->hasMany(AcademicYearTerm::class);
+        return $this->belongsTo(AcademicYearTerm::class);
     }
 
     public function faculty_load() {

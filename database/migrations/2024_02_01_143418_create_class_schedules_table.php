@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('block_id')->nullable()->constrained();
             $table->foreignId('classroom_id')->nullable()->constrained();
             $table->foreignId('time_id')->nullable()->constrained();
-            $table->foreignId('day_id')->nullable()->constrained();
             $table->foreignId('academic_year_term_id')->nullable()->constrained();
             $table->timestamps();
         });

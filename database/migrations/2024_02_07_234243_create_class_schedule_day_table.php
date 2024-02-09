@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('subjects', function (Blueprint $table) {
-            $table->enum('laboratory', ['Yes', 'No'])->change(); // Change the column type to ENUM
+        Schema::create('class_schedule_day', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('class_schedule_id')->constrained();
+            $table->foreignId('day_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('subjects', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('class_schedule_day');
     }
 };

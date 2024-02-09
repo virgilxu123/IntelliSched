@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('units');
             $table->string('year_level');
-            $table->string('term');
+            $table->foreignId('term_id')->nullable()->constrained();
             $table->string('subject_type');
-            $table->string('Laboratory');
+            $table->enum('laboratory', ['Yes', 'No']);
             $table->timestamps();
         });
     }

@@ -77,45 +77,6 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2022-2023</td>
-                                        <td><a href="#"><em>1st-Semester</em></a></td>
-                                        <td><a href=""><em>2nd-Semester</em></a></td>
-                                        <td><a href=""><em>Summer</em></a></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
-                                                    <i class="fa fa-cog"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                    <div class="dropdown-menu-content">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2021-2022</td>
-                                        <td><a href=""><em>1st-Semester</em></a></td>
-                                        <td><a href=""><em>2nd-Semester</em></a></td>
-                                        <td><a href=""><em>Summer</em></a></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton3" data-toggle="dropdown">
-                                                    <i class="fa fa-cog"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                                    <div class="dropdown-menu-content">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
                                     
                                 </tbody>
                             </table>

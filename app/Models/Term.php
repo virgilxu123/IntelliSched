@@ -13,8 +13,8 @@ class Term extends Model
         'term',
     ];
 
-    public function academic_years() {
-        return $this->belongsToMany(AcademicYear::class);
+    public function academic_year_terms() {
+        return $this->hasMany(AcademicYearTerm::class);
     }
 
     public function subjects() {

@@ -14,7 +14,7 @@ class AcademicYear extends Model
         'year_end',
     ];
 
-    public function terms() {
-        return $this->belongsToMany(Term::class);
+    public function academic_year_terms() {
+        return $this->hasMany(AcademicYearTerm::class);
     }
 }
