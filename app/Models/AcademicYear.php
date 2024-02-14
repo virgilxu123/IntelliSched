@@ -11,7 +11,6 @@ class AcademicYear extends Model
 
     protected $fillable = [
         'year_start',
-        'year_end',
     ];
 
     public function academic_year_terms() {

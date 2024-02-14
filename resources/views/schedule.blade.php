@@ -31,13 +31,12 @@
 
 @endsection
 @section('content')
-    <div class="col-lg-12">
+    <div class="col-lg-12 animated fadeIn">
         <button type="button" class="btn btn-primary rounded mt-2" data-toggle="modal" data-target="#mediumModal">
             <i class="fa fa-plus-circle"></i> Create New
         </button>
-        <div class="animated fadeIn mt-2">
+        <div class="mt-2">
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -50,33 +49,39 @@
                                         <th>Academic Year</th>
                                         <th>First Semester</th>
                                         <th>Second Semester</th>
-                                        <th>Summer</th>
-                                        <th>Action</th>
+                                        <th>Summer/Mid Year</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2023-2024</td>
-                                        <td><a href="{{route('create-schedule')}}"><em>1st-Semester</em></a></td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn bg-transparent dropdown-toggle theme-toggle text-dark" type="button" id="dropdownMenuButton1" data-toggle="dropdown">
-                                                    <i class="fa fa-cog"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <div class="dropdown-menu-content">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-plus" style="color: blue"></i> New</a>
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-edit" style="color: green"></i> Edit</a>
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: red"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($years as $year)
+                                        <tr>
+                                            <td>{{$year->year_start}}-{{$year->year_start + 1}}</td>
+                                            @php
+                                                $firstSemester = null;
+                                                $secondSemester = null;
+                                                $summer = null;
+
+                                            @endphp
+                                            @foreach ($academicYearTerms as $academicYearTerm)
+                                            @if ($academicYearTerm->academic_year_id === $year->id)
+                                                @switch($academicYearTerm->term_id)
+                                                    @case(1)
+                                                        @php $firstSemester = $academicYearTerm @endphp
+                                                        @break
+                                                    @case(2)
+                                                        @php $secondSemester = $academicYearTerm @endphp
+                                                        @break
+                                                    @case(3)
+                                                        @php $summer = $academicYearTerm @endphp
+                                                        @break
+                                                    @endswitch
+                                                @endif
+                                            @endforeach
+                                            <td><a href="{{$firstSemester ? route('create-schedule', $firstSemester->id):''}}"><em>{{ $firstSemester ? 'First Semester' : '' }}</em></a></td>
+                                            <td><a href="{{$secondSemester?route('create-schedule', $secondSemester->id):''}}"><em>{{ $secondSemester ? 'Second Semester' : '' }}</em></a></td>
+                                            <td><a href="{{$summer ? route('create-schedule', $summer->id):''}}"><em>{{ $summer ? 'Summer/Mid Year' : '' }}</em></a></td>
+                                        </tr>
+                                    @endforeach
                                     
                                 </tbody>
                             </table>
@@ -90,63 +95,48 @@
     </div>
 
 
-    <!-- Add Term Modal -->
-<div class="modal fade" id="addTermModal" tabindex="-1" role="dialog" aria-labelledby="addTermModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addTermModalLabel">Add Term Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to add a new term?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmAddTerm" data-dismiss="modal">Add Term</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
     {{-- modal --}}
     <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Create New Schedule</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <div class="card-body card-block">
-                            <form action="" method="post" class="">
-                                <div class="form-group">
-                                    <label for="year" class=" form-control-label">Academic Year</label>
-                                    <input type="text" id="year" name="year" placeholder="Enter Acad Yr.." class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="term" class=" form-control-label">Term</label>
-                                    <select name="term" id="term" class="form-control">
-                                        <option value="0">Please select</option>
-                                        <option value="1">1st</option>
-                                        <option value="2">2nd</option>
-                                        <option value="3">Summer</option>
-                                    </select>
-                                </div>
-                            </form>
+                <form action="{{route('create-academic-year-term')}}" method="post" class="">
+                @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mediumModalLabel">Create New Schedule</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body card-block">
+                                    <div class="form-group">
+                                        <label for="year" class=" form-control-label">Academic Year</label>
+                                        <select name="year" id="year" class="form-control">
+                                            @foreach ($academicYears as $academicYear)
+                                                <option value="{{$academicYear}}">{{$academicYear}}-{{$academicYear + 1}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="term" class=" form-control-label">Term</label>
+                                        <select name="term" id="term" class="form-control">
+                                            <option value="0">Please select</option>
+                                            @foreach ($terms as $term)
+                                                <option value="{{ $term->id }}">{{ $term->term }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Confirm</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary rounded" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded">Confirm</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -421,32 +411,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Add a click event listener to the "Add Term" buttons in the modal
-            $('.add-term-btn').click(function () {
-                // Get the id from the associated <a> tag
-                var termId = $(this).prev('a').attr('id');
-    
-                // Set the term id in the modal confirmation button
-                $('#confirmAddTerm').data('term-id', termId);
-            });
-    
-            // Add a click event listener to the "Add Term" button in the modal
-            $('#confirmAddTerm').click(function () {
-                // Get the term id from the modal confirmation button data attribute
-                var termId = $(this).data('term-id');
-    
-                // Use the term id as needed
-                console.log('Selected term id:', termId);
-    
-                // Implement your logic to create the term here
-    
-                // Close the modal after confirmation
-                $('#addTermModal').modal('hide');
-            });
-        });
-    </script>
 
 
 @endsection

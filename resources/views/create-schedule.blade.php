@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="{{asset('admin-assets/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin-assets/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin-assets/vendors/chosen/chosen.min.css')}}">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{asset('admin-assets/assets/css/schedule.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    
+    
 @endsection
 
 @section('breadcrumbs')
     <div class="breadcrumbs">
         <div class="col-sm-6">
-            <div class="page-header float-left align-bottom">
-                <nav>
-                    <div class="nav" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="loading-subject" data-toggle="tab" href="#load-subject" role="tab" aria-controls="load-subject" aria-selected="true">Load Subjects</a>
-                        <a class="nav-item nav-link" id="plot-schedule" data-toggle="tab" href="#plot" role="tab" aria-controls="plot" aria-selected="false">Plot Schedule</a>
-                    </div>
-                </nav>
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <p class=" breadcrumb">S.Y. {{$academicYearTerm->academic_year->year_start}}-{{$academicYearTerm->academic_year->year_start + 1}}:<em>{{$academicYearTerm->term->term}}</em></p>
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
@@ -36,7 +39,45 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="animated fadein" >
+        <div class="tab-group bg-light">
+            <section id="tab1" title="Classes/Blocks" class="p-3">
+                <div id="toolbar">
+                    <button id="button" class="btn btn-primary rounded"><i class="fa fa-plus-square"></i> Open</button>
+                </div>
+                <table id="table" data-toggle="table" data-toolbar="#toolbar" data-click-to-select="true"  data-search="true" data-height="530" class="table table-bordered bg-white">
+                    <thead>
+                        <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="course_code" data-sortable="true">Subject Code</th>
+                        <th data-field="description" data-sortable="true">Description</th>
+                        <th data-field="year_level" data-sortable="true" >Year Level</th>
+                        <th data-field="blocks" data-sortable="true">Blocks</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($subjects as $subject)
+                            <tr data-subject-id="{{$subject->id}}">
+                                <td></td>
+                                <td>{{$subject->course_code}}</td>
+                                <td>{{$subject->description}}</td>
+                                <td>{{$subject->year_level}}</td>
+                                <td></td>
+                                <td></td>
+                                
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </section>
+            <section id="tab2" title="Load Subjects">
+                @include('pages.load-subjects')
+            </section>
+            <section id="tab3" title="Plot Schedule">
+                @include('pages.plot-schedule')
+            </section>
+          </div>
+        {{-- <div class="animated fadeIn" >
             <div class="row tab-content pl-3 pt-2" id="nav-tabContent">
                 <div class="tab-pane fade show active col-lg-12" id="load-subject" role="tabpanel" aria-labelledby="loading-subject">
                     <div class="card">
@@ -312,30 +353,54 @@
                 
                 </div>
             </div>
-        </div> 
+        </div>  --}}
     </div>
+    {{-- open classes modal --}}
+    <div id="openClasses" class="modal fade fadeIn" tabindex="-1">
+        <div class="modal-dialog">
+            <form action="" method="POST">
+            @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Open New Classes/Blocks</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="blocks">Enter number of blocks for selected subjects</label>
+                        <input id="blocks" class="form-control" type="number">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary rounded" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary rounded">Ok</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- open classes modal --}}
 @endsection
 @section('scripts')
-    <script src="{{asset('admin-assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script  src="{{asset('admin-assets/assets/js/script.js')}}"></script>
     <script src="{{asset('admin-assets/assets/js/drag.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/jszip/dist/jszip.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('admin-assets/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
-    <script src="{{asset('admin-assets/vendors/chosen/chosen.jquery.min.js')}}"></script>
-
     <script>
-        jQuery(document).ready(function() {
-            jQuery(".standardSelect").chosen({
-                disable_search_threshold: 10,
-                no_results_text: "Oops, nothing found!",
-                width: "100%"
+        $(document).ready(function () {
+            var $table = $('#table')
+            var $table = $('#table');
+            var $button = $('#button');
+            var $modal = $('#openClasses');
+            $button.click(function () {
+                if($table.bootstrapTable('getSelections').length > 0){
+                    $modal.modal('show');
+                }else {
+                    alert('Please select a subject');
+                }
             });
         });
     </script>

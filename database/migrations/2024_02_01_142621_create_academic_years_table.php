@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
             $table->year('year_start');
-            $table->year('year_end');
             $table->timestamps();
         });
     }

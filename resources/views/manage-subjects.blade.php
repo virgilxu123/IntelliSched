@@ -86,7 +86,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($subjects as $subject)
-                                        <tr data-course_code="{{$subject->course_code}}" data-description="{{$subject->description}}" data-units="{{$subject->units}}" data-year_level="{{$subject->year_level}}" data-term="{{ optional($subject->term)->term ?? '' }}" data-subject_type="{{$subject->subject_type}}" data-laboratory="{{$subject->laboratory}}" data-subject_id="{{$subject->id}}">
+                                        <tr data-subject_id="{{$subject->id}}">
                                             <td>{{$subject->course_code}}</td>
                                             <td>{{$subject->description}}</td>
                                             <td>{{$subject->units}}</td>

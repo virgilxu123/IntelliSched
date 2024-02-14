@@ -9,6 +9,11 @@ class AcademicYearTerm extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'academic_year_id',
+        'term_id',
+    ];
+
     public function class_schedule() {
         return $this->hasMany(ClassSchedule::class);
     }

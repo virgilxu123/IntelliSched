@@ -53,33 +53,23 @@
                     <li class="active">
                         <a href="{{route('dashboard')}}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
-                    <h3 class="menu-title">Management</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-wrench"></i>Manage</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-users"></i><a href="{{route('manage-faculty')}}">Faculty</a></li>
-                            <li><i class="fa fa-building-o"></i><a href="{{route('manage-rooms')}}">Rooms</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{{route('manage-subjects')}}">Subjects</a></li>
-                            <li><i class="fa fa-user"></i><a href="{{route('manage-admin')}}">Admin</a></li>
-                        </ul>
-                    </li>
-                            
+                    <h3 class="menu-title">Generate</h3><!-- /.menu-title -->
                     <li>
                         <a href="{{route('schedule')}}"><i class="menu-icon fa fa-table"></i> Schedule</a>
                     </li>
-                    
-                    <h3 class="menu-title">Utilities</h3><!-- /.menu-title -->
-
+                    <h3 class="menu-title">Manage</h3><!-- /.menu-title -->
                     <li>
-                        <a href="widgets.html"> <i class="menu-icon fa fa-upload"></i>Import </a>
+                        <a href="{{route('manage-faculty')}}"><i class="menu-icon fa fa-users"></i> Faculty</a>
                     </li>
                     <li>
-                        <a href="widgets.html"> <i class="menu-icon fa fa-print"></i>Reports </a>
+                        <a href="{{route('manage-subjects')}}"><i class="menu-icon fa fa-bars"></i>Subjects</a>
                     </li>
                     <li>
-                        <a href="widgets.html"> <i class="menu-icon fa fa-link"></i>External Links </a>
+                        <a href="{{route('manage-rooms')}}"><i class="menu-icon fa fa-building-o"></i>Rooms</a>
                     </li>
-
+                    <li>
+                        <a href="{{route('manage-admin')}}"><i class="menu-icon fa fa-user"></i>Admin</a>
+                    </li>
                     
                 </ul>
             </div><!-- /.navbar-collapse -->

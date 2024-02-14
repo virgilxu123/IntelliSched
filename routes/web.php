@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AcademicYearTermController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ClassScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Models\AcademicYearTerm;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,13 +63,11 @@ Route::middleware('auth')->prefix('intellisched')->group(function() {
     Route::get('manage-admin', function () {
         return view('manage-admin');
     })->name('manage-admin');
-    Route::get('schedule', function () {
-        return view('schedule');
-    })->name('schedule');
+        
+    Route::get('schedule', [AcademicYearTermController::class, 'index'])->name('schedule');
+    Route::post('create-academic-year-term', [AcademicYearTermController::class, 'store'])->name('create-academic-year-term');
+    Route::get('create-schedule/{academic_year_term}', [AcademicYearTermController::class, 'show'])->name('create-schedule');
 });
 
-Route::get('create-schedule', function () {
-    return view('create-schedule');
-})->name('create-schedule');
 
 require __DIR__.'/auth.php';
